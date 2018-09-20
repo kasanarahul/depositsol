@@ -19,7 +19,7 @@ public class testSel {
 	@Test
 	public void testLogin()
 	{
-		System.out.println("In test method");
+		System.out.println("In test method2");
 	}
 
 }
