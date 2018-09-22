@@ -14,11 +14,13 @@ public class addUsersFnlib extends baseSetup{
 		objaddUserPage.setName(name);
 		objaddUserPage.setEmail(Email);
 		objaddUserPage.setPassword(pwd);
+		
 		objaddUserPage.setConfirmationPassword(confirmpwd);
 		
 		objaddUserPage.clickSubmit();
 //		objaddUserPage.clickAllUser();
 		
 	}
-
+	
+	
 }

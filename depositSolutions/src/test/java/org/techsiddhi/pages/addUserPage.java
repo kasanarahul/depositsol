@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 
 
-
 public class addUserPage {
 	private WebDriver driver;
 	
@@ -18,6 +17,7 @@ public class addUserPage {
 	public By lblPwdErr= By.id("user.password.error");
 	public By lblConfPwdErr= By.id("user.confirmationPassword.error");
 	public By lblUserErr= By.id("user.name.error");
+	
 	
 	public addUserPage(WebDriver driver){
 		this.driver=driver;
@@ -47,6 +47,7 @@ public class addUserPage {
 
     public void setConfirmationPassword(String strPassword){
 
+    	driver.findElement(txtconfirmationPassword).clear();
          driver.findElement(txtconfirmationPassword).sendKeys(strPassword);
     }
     

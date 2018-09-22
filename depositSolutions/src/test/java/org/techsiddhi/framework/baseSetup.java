@@ -9,6 +9,7 @@ public class baseSetup {
 
 	WebDriver driver;
 	public addUserPage objaddUserPage;
+	public allUserPage objallUserPage;
 	public WebDriverWait wait;
 	public String baseUrl="http://85.93.17.135:9000";
 	
@@ -16,6 +17,7 @@ public class baseSetup {
 	{
 		this.driver=driver;
 		objaddUserPage=new addUserPage(driver);
+		objallUserPage=new allUserPage(driver);
 		wait=new WebDriverWait(this.driver, 50);
 	}
 }
