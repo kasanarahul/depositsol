@@ -17,13 +17,13 @@ public class allUserPage {
 	//validate if value is present in table
 	public boolean validateUserPresent(String username)
 	{
-		boolean present;
+		boolean elementAvlbl;
 		try {
 		   driver.findElement(By.xpath("//td[text()='"+username+"']"));
-		   present = true;
+		   elementAvlbl = true;
 		} catch (NoSuchElementException e) {
-		   present = false;
+			elementAvlbl = false;
 		}
-		return present;
+		return elementAvlbl;
 	}
 }
