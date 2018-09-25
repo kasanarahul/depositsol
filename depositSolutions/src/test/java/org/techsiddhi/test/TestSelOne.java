@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.techsiddhi.framework.APIlib;
 import org.techsiddhi.framework.AppLib;
 import org.techsiddhi.framework.baseSetup;
 import org.techsiddhi.pages.addUserPage;
