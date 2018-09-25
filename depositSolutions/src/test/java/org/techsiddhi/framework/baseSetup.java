@@ -1,8 +1,10 @@
 package org.techsiddhi.framework;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.techsiddhi.pages.*;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,18 +13,14 @@ import java.util.Properties;
 public class baseSetup {
 
 	WebDriver driver;
-	public addUserPage objaddUserPage;
-	public allUserPage objallUserPage;
-	public WebDriverWait wait;
-	public String baseUrl, getAllUsers;
+
+	public static String baseUrl, getAllUsers;
 	public static String deleteAllUsers;
 	
-	public baseSetup (WebDriver driver)
+	public baseSetup ()
 	{
-		this.driver=driver;
-		objaddUserPage=new addUserPage(driver);
-		objallUserPage=new allUserPage(driver);
-		wait=new WebDriverWait(this.driver, 50);
+		//load env properties on setup
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
@@ -33,9 +31,10 @@ public class baseSetup {
 		prop.load(input);
 
 		// get the property value and print it out
-		this.baseUrl=prop.getProperty("baseUrl");
-		this.getAllUsers=prop.getProperty("getAllAPI");
-		this.deleteAllUsers=prop.getProperty("deleteAPI");
+		baseUrl=prop.getProperty("baseUrl");
+		getAllUsers=prop.getProperty("getAllAPI");
+		deleteAllUsers=prop.getProperty("deleteAPI");
+		
 		
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -50,4 +49,41 @@ public class baseSetup {
 		}
 		
 	}
+	
+	
+	//get all users via API
+	public String getAllUsers()
+	{
+		Response resp=RestAssured.get(baseUrl+getAllUsers);
+		int code = resp.getStatusCode();
+		System.out.println(resp.jsonPath().getList("/name"));
+		return resp.asString();
+		
+	}
+	
+	//Validate if user is present via API
+	public boolean validateUserPresentAPI(String userName)
+	{
+		Response resp=RestAssured.get(baseUrl+getAllUsers);
+		if(resp.asString().contains("\"name\":\""+userName))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	
+	//Delete all users via API
+	public int deleteAllUsers()
+	{
+		Response resp=RestAssured.delete(baseUrl+deleteAllUsers);
+		int code = resp.getStatusCode();
+		System.out.println("status code is: "+code);
+		return code;
+		
+	}
+
 }
